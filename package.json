@@ -3,6 +3,10 @@
   "version": "0.0.1",
   "description": "postgis extension for knex",
   "main": "lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jfgodoy/knex-postgis.git"
+  },
   "dependencies": {
   },
   "devDependencies": {
