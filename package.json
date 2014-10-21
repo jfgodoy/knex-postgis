@@ -1,0 +1,25 @@
+{
+  "name": "knex-postgis",
+  "version": "0.0.1",
+  "description": "postgis extension for knex",
+  "main": "lib/index.js",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "knex": "^0.7.3",
+    "chai": "^1.9.2",
+    "mocha": "^1.21.5"
+  },
+  "scripts": {
+    "test": "node_modules/.bin/mocha tests"
+  },
+  "keywords": [
+    "knex",
+    "postgres",
+    "postgis",
+    "sql",
+    "sql builder"
+  ],
+  "author": "Jorge Godoy <godoy.jf@gmail.com>",
+  "license": "MIT"
+}
