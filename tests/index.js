@@ -86,5 +86,14 @@ describe('Postgis functions', function() {
       'insert into "points" ("geom", "id") values (ST_geomFromText(\'Polygon((0 0, 0 1, 1 1, 1 0, 0 0))\', 4326), ?)');
   });
 
+  it('insert with geomFromGeoJSON', function() {
+    testsql(knex()
+      .insert({
+        'id': 1,
+        'geom': st.geomFromGeoJSON('{"type":"Point","coordinates":[-48.23456,20.12345]}')
+      })
+      .into('points'),
+      'insert into "points" ("geom", "id") values (ST_geomFromGeoJSON(\'{"type":"Point","coordinates":[-48.23456,20.12345]}\'), ?)');
+  });
 
 });
