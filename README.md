@@ -14,7 +14,11 @@ var knex = require('knex')({
 });
 
 // install postgis functions in knex.postgis;
-var st = require('../lib/index')(knex);
+var st = require('knex-postgis')(knex);
+/* or:
+ * require('knex-postgis')(knex);
+ * st = knex.postgis;
+ */
 
 // insert a point
 var sql1 = knex.insert({
@@ -36,11 +40,37 @@ console.log(sql3);
 
 ```
 
-## currently supported functions
+## Currently supported functions
 
+- area(geom)
 - asText(column)
 - asEWKT(column)
 - centroid(geom)
+- intersection(geom1, geom2)
 - intersects(geom1, geom2)
 - geomFromText(geom, srid)
+- transform(geom, srid)
+- x
+- y
 
+## Define extra functions
+
+```js
+var knex = require('knex')({
+  dialect: 'postgres'
+});
+
+require('knex-postgis')(knex);
+
+st = knex.postgis;
+
+knex.postgisDefineExtras(function(knex, formatter){
+  return {
+    utmzone: function(geom) {
+      return knex.raw('utmzone(' + formatter.wrapWKT(geom) + ')');
+    }
+  };
+});
+
+//now you can use st.utmzone function in the same way as predefined functions
+```
