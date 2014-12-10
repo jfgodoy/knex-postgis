@@ -94,5 +94,32 @@ describe('Postgis functions', function() {
       'insert into "points" ("geom", "id") values (ST_geomFromText(\'Polygon((0 0, 0 1, 1 1, 1 0, 0 0))\', 4326), ?)');
   });
 
+});
+
+describe('Postgis extras', function() {
+
+  it('define extra functions', function() {
+    knex.postgisDefineExtras(function(knex, formatter){
+      return {
+        utmzone: function(geom) {
+          return knex.raw('utmzone(' + formatter.wrapWKT(geom) + ')');
+        }
+      };
+    });
+
+    testsql(knex()
+      .select('id', st.utmzone('point').as('utm'))
+      .from('points'),
+      'select "id", utmzone("point") as "utm" from "points"'
+    );
+
+    testsql(knex()
+      .select('id', st.utmzone(st.geomFromText('Point(0 0, 0 1)', 4326)).as('utm'))
+      .from('points'),
+      'select "id", utmzone(ST_geomFromText(\'Point(0 0, 0 1)\', 4326)) as "utm" from "points"'
+    );
+
+
+  });
 
 });
