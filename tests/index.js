@@ -76,6 +76,14 @@ describe('Postgis functions', function() {
       'select "id", ST_asText("geom") as "geom" from "points" where ST_intersects("geom", ST_geomFromText(\'Polygon((0 0, 0 1, 1 1, 1 0, 0 0))\', 4326))');
   });
 
+  it('select with intersects, field name is equals a type defined in WKT', function() {
+    testsql(knex()
+      .select('id', st.asText('point'))
+      .from('points')
+      .where(st.intersects('point', st.geomFromText('Polygon((0 0, 0 1, 1 1, 1 0, 0 0))', 4326))),
+      'select "id", ST_asText("point") as "point" from "points" where ST_intersects("point", ST_geomFromText(\'Polygon((0 0, 0 1, 1 1, 1 0, 0 0))\', 4326))');
+  });
+
   it('insert with geomFromText', function() {
     testsql(knex()
       .insert({
