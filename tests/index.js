@@ -94,6 +94,35 @@ describe('Postgis functions', function() {
       'insert into "points" ("geom", "id") values (ST_geomFromText(\'Polygon((0 0, 0 1, 1 1, 1 0, 0 0))\', 4326), ?)');
   });
 
+  it('insert with geomFromGeoJSON text', function() {
+    testsql(knex()
+      .insert({
+        'id': 1,
+        'geom': st.geomFromGeoJSON('{"type":"Point","coordinates":[-48.23456,20.12345]}')
+      })
+      .into('points'),
+      'insert into "points" ("geom", "id") values (ST_geomFromGeoJSON(\'{"type":"Point","coordinates":[-48.23456,20.12345]}\'), ?)');
+  });
+
+  it('insert with geomFromGeoJSON object', function() {
+    testsql(knex()
+      .insert({
+        'id': 1,
+        'geom': st.geomFromGeoJSON({type:'Point', coordinates:[-48.23456, 20.12345]})
+      })
+      .into('points'),
+      'insert into "points" ("geom", "id") values (ST_geomFromGeoJSON(\'{"type":"Point","coordinates":[-48.23456,20.12345]}\'), ?)');
+  });
+
+  it('update a geometry column using geomFromGeoJSON text from another column', function() {
+    testsql(knex()
+      .update({
+        'geom': st.geomFromGeoJSON('geoJsonColumn')
+      })
+      .table('points'),
+      'update "points" set "geom" = ST_geomFromGeoJSON("geoJsonColumn")');
+  });
+
   it('allow spaces between WKT type and the first parenthesis', function() {
     testsql(knex()
       .insert({
@@ -128,8 +157,5 @@ describe('Postgis extras', function() {
       .from('points'),
       'select "id", utmzone(ST_geomFromText(\'Point(0 0, 0 1)\', 4326)) as "utm" from "points"'
     );
-
-
   });
-
 });

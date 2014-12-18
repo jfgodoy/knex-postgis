@@ -23,3 +23,10 @@ console.log(sql2);
 var sql3 = knex.select('id', st.asText(st.centroid('geom')).as('centroid')).from('geometries').toString();
 console.log(sql3);
 // select "id", ST_asText(ST_centroid("geom")) as "centroid" from "geometries"
+
+// insert a point from a geojson object
+var sql4 = knex.insert({
+  id: 1,
+  geom: st.geomFromGeoJSON('{"type": "Point", "coordinates": [-48.23456,20.12345]}')
+}).into('points').toString();
+console.log(sql4);
