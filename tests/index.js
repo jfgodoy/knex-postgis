@@ -123,6 +123,11 @@ describe('Postgis functions', function() {
       'update "points" set "geom" = ST_geomFromGeoJSON("geoJsonColumn")');
   });
 
+  it('select with asGeoJSON', function() {
+    testsql(knex().select('id', st.asGeoJSON('geom')).from('points'),
+      'select "id", ST_asGeoJSON("geom") as "geom" from "points"');
+  });
+
   it('allow spaces between WKT type and the first parenthesis', function() {
     testsql(knex()
       .insert({
