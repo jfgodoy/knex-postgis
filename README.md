@@ -44,11 +44,13 @@ console.log(sql3);
 
 - area(geom)
 - asText(column)
+- asGeoJSON(column)
 - asEWKT(column)
 - centroid(geom)
 - intersection(geom1, geom2)
 - intersects(geom1, geom2)
 - geomFromText(geom, srid)
+- geomFromGeoJSON(geojson /*object, string or column name*/)
 - transform(geom, srid)
 - x
 - y
