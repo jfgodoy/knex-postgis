@@ -94,6 +94,16 @@ describe('Postgis functions', function() {
       'insert into "points" ("geom", "id") values (ST_geomFromText(\'Polygon((0 0, 0 1, 1 1, 1 0, 0 0))\', 4326), ?)');
   });
 
+  it('insert with geomFromText Formato EWKT', function() {
+    testsql(knex()
+      .insert({
+        'id': 1,
+        'geom': st.geomFromText('SRID=4326;Polygon((0 0, 0 1, 1 1, 1 0, 0 0))')
+      })
+      .into('points'),
+      'insert into "points" ("geom", "id") values (ST_geomFromText(\'Polygon((0 0, 0 1, 1 1, 1 0, 0 0))\', 4326), ?)');
+  });
+
   it('insert with geomFromGeoJSON text', function() {
     testsql(knex()
       .insert({
