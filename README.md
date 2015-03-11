@@ -69,7 +69,7 @@ st = knex.postgis;
 knex.postgisDefineExtras(function(knex, formatter){
   return {
     utmzone: function(geom) {
-      return knex.raw('utmzone(' + formatter.wrapWKT(geom) + ')');
+      return knex.raw('utmzone(?)', formatter.wrapWKT(geom));
     }
   };
 });
