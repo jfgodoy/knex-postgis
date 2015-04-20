@@ -17,7 +17,6 @@ function testError(obj) {
   }).to.throw(Error);
 }
 
-
 describe('geoJSON validation', function() {
 
   it('filter invalid ', function() {
