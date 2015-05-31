@@ -14,6 +14,10 @@ var knex = require('knex')({
 var st = require('../lib/index.js')(knex);
 
 
+function queryBuilder() {
+  return knex.queryBuilder ? knex.queryBuilder() : knex();
+}
+
 function verifySqlResult(expectedObj, sqlObj) {
   Object.keys(expectedObj).forEach(function(key) {
     expect(sqlObj[key]).to.deep.equal(expectedObj[key]);
@@ -33,6 +37,7 @@ function testsql(func, res) {
 }
 
 
+
 describe('Postgis functions', function() {
 
   it('alias', function() {
@@ -48,28 +53,28 @@ describe('Postgis functions', function() {
   });
 
   it('select with asText', function() {
-    testsql(knex().select('id', st.asText('geom')).from('points'), {
+    testsql(queryBuilder().select('id', st.asText('geom')).from('points'), {
       sql: 'select "id", ST_asText("geom") as "geom" from "points"',
       bindings: []
     });
   });
 
   it('select with asEWKT', function() {
-    testsql(knex().select('id', st.asEWKT('geom')).from('points'), {
+    testsql(queryBuilder().select('id', st.asEWKT('geom')).from('points'), {
       sql: 'select "id", ST_asEWKT("geom") as "geom" from "points"',
       bindings: []
     });
   });
 
   it('select with centroid', function() {
-    testsql(knex().select('id', st.centroid('geom')).from('points'), {
+    testsql(queryBuilder().select('id', st.centroid('geom')).from('points'), {
       sql: 'select "id", ST_centroid("geom") from "points"',
       bindings: []
     });
   });
 
   it('select with centroid and asText', function() {
-    testsql(knex().select('id', st.asText(st.centroid('geom')).as('centroid')).from('points'), {
+    testsql(queryBuilder().select('id', st.asText(st.centroid('geom')).as('centroid')).from('points'), {
       sql: 'select "id", ST_asText(ST_centroid("geom")) as "centroid" from "points"',
       bindings: []
     });
@@ -77,7 +82,7 @@ describe('Postgis functions', function() {
 
   it('select with intersects, argument in ewkt format', function() {
     testsql(
-      knex()
+      queryBuilder()
         .select('id', st.asText('geom'))
         .from('points')
         .where(st.intersects('geom', 'SRID=4326;Polygon((0 0, 0 1, 1 1, 1 0, 0 0))')),
@@ -89,7 +94,7 @@ describe('Postgis functions', function() {
 
   it('select with intersects, argument using geomFromText function', function() {
     testsql(
-      knex()
+      queryBuilder()
         .select('id', st.asText('geom'))
         .from('points')
         .where(st.intersects('geom', st.geomFromText('Polygon((0 0, 0 1, 1 1, 1 0, 0 0))', 4326))),
@@ -101,7 +106,7 @@ describe('Postgis functions', function() {
 
   it('select with intersects, field name is equals to a type defined in WKT', function() {
     testsql(
-      knex()
+      queryBuilder()
         .select('id', st.asText('point'))
         .from('points')
         .where(st.intersects('point', st.geomFromText('Polygon((0 0, 0 1, 1 1, 1 0, 0 0))', 4326))),
@@ -113,7 +118,7 @@ describe('Postgis functions', function() {
 
   it('insert with geomFromText', function() {
     testsql(
-      knex()
+      queryBuilder()
         .insert({
           'id': 1,
           'geom': st.geomFromText('Polygon((0 0, 0 1, 1 1, 1 0, 0 0))', 4326)
@@ -127,7 +132,7 @@ describe('Postgis functions', function() {
 
   it('insert with geomFromText Formato EWKT', function() {
     testsql(
-      knex()
+      queryBuilder()
         .insert({
           'id': 1,
           'geom': st.geomFromText('SRID=4326;Polygon((0 0, 0 1, 1 1, 1 0, 0 0))')
@@ -141,7 +146,7 @@ describe('Postgis functions', function() {
 
   it('insert with geomFromGeoJSON text', function() {
     testsql(
-      knex()
+      queryBuilder()
         .insert({
           'id': 1,
           'geom': st.geomFromGeoJSON('{"type":"Point","coordinates":[-48.23456,20.12345]}')
@@ -155,7 +160,7 @@ describe('Postgis functions', function() {
 
   it('insert with geomFromGeoJSON object', function() {
     testsql(
-      knex()
+      queryBuilder()
         .insert({
           'id': 1,
           'geom': st.geomFromGeoJSON({type:'Point', coordinates:[-48.23456, 20.12345]})
@@ -169,7 +174,7 @@ describe('Postgis functions', function() {
 
   it('update a geometry column using geomFromGeoJSON text from another column', function() {
     testsql(
-      knex()
+      queryBuilder()
         .update({
           'geom': st.geomFromGeoJSON('geoJsonColumn')
         })
@@ -181,7 +186,7 @@ describe('Postgis functions', function() {
   });
 
   it('select with asGeoJSON', function() {
-    testsql(knex().select('id', st.asGeoJSON('geom')).from('points'), {
+    testsql(queryBuilder().select('id', st.asGeoJSON('geom')).from('points'), {
       sql: 'select "id", ST_asGeoJSON("geom") as "geom" from "points"',
       bindings: []
     });
@@ -189,7 +194,7 @@ describe('Postgis functions', function() {
 
   it('allow spaces between WKT type and the first parenthesis', function() {
     testsql(
-      knex()
+      queryBuilder()
         .insert({
           'id': 1,
           'geom': st.geomFromText('Polygon ((0 0, 0 1, 1 1, 1 0, 0 0))', 4326)
@@ -203,7 +208,7 @@ describe('Postgis functions', function() {
 
   it('prevent sql injection', function() {
     testsql(
-      knex()
+      queryBuilder()
         .insert({
           id: 1,
           geom: st.geomFromText("Point(')); DROP TABLE points; SELECT concat(concat(')", 4326)
@@ -216,7 +221,7 @@ describe('Postgis functions', function() {
 
     expect(
       function() {
-        return knex()
+        return queryBuilder()
           .insert({
             id: 1,
             geom: st.geomFromGeoJSON({type: 'Point', coordinates: 'DROP TABLE points;'})
@@ -227,7 +232,7 @@ describe('Postgis functions', function() {
   });
 
   it('prevent sql injection', function() {
-    testsql(knex()
+    testsql(queryBuilder()
       .insert({
         id: 1,
         geom: st.geomFromText("Point(')); DROP TABLE points; SELECT concat(concat(')", 4326)
@@ -237,7 +242,7 @@ describe('Postgis functions', function() {
 
     expect(
       function() {
-        return knex()
+        return queryBuilder()
           .insert({
             id: 1,
             geom: st.geomFromGeoJSON({type: 'Point', coordinates: 'DROP TABLE points;'})
@@ -255,13 +260,13 @@ describe('Postgis extras', function() {
     knex.postgisDefineExtras(function(knex, formatter) {
       return {
         utmzone: function(geom) {
-          return knex.raw('utmzone(?)', formatter.wrapWKT(geom));
+          return knex.raw('utmzone(?)', [formatter.wrapWKT(geom)]);
         }
       };
     });
 
     testsql(
-      knex()
+      queryBuilder()
         .select('id', st.utmzone('point')
         .as('utm'))
         .from('points'),
@@ -272,7 +277,7 @@ describe('Postgis extras', function() {
     );
 
     testsql(
-      knex()
+      queryBuilder()
         .select('id', st.utmzone(st.geomFromText('Point(0 0, 0 1)', 4326))
         .as('utm'))
         .from('points'),
