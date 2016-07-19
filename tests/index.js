@@ -262,17 +262,80 @@ describe('Postgis functions', function() {
 });
 
 describe('Geometry Constructors', function() {
-  it('can make an envelope', function() {
-    testsql(queryBuilder().select(st.makeEnvelope(-48.25456, 20.02345, -48.21456, 20.62345)), {
-      sql: 'select ST_MakeEnvelope(?, ?, ?, ?)',
-      bindings: [-48.25456, 20.02345, -48.21456, 20.62345]
+  describe('MakeEnvelope', function() {
+    it('can make an envelope', function() {
+      testsql(queryBuilder().select(st.makeEnvelope(-48.25456, 20.02345, -48.21456, 20.62345)), {
+        sql: 'select ST_MakeEnvelope(?, ?, ?, ?)',
+        bindings: [-48.25456, 20.02345, -48.21456, 20.62345]
+      });
+    });
+
+    it('can make an envelope with a specified srid', function() {
+      testsql(queryBuilder().select(st.makeEnvelope(-48.25456, 20.02345, -48.21456, 20.62345, 4326)), {
+        sql: 'select ST_MakeEnvelope(?, ?, ?, ?, ?)',
+        bindings: [-48.25456, 20.02345, -48.21456, 20.62345, 4326]
+      });
     });
   });
 
-  it('can make an envelope with a specified srid', function() {
-    testsql(queryBuilder().select(st.makeEnvelope(-48.25456, 20.02345, -48.21456, 20.62345, 4326)), {
-      sql: 'select ST_MakeEnvelope(?, ?, ?, ?, ?)',
-      bindings: [-48.25456, 20.02345, -48.21456, 20.62345, 4326]
+  describe('MakePoint', function() {
+    it('can make a point', function() {
+      testsql(queryBuilder().select(st.makePoint(-48.23456, 20.12345)), {
+        sql: 'select ST_MakePoint(?, ?)',
+        bindings: [-48.23456, 20.12345]
+      });
+    });
+
+    it('can make a point with a height', function() {
+      testsql(queryBuilder().select(st.makePoint(-48.23456, 20.12345, 1.5)), {
+        sql: 'select ST_MakePoint(?, ?, ?)',
+        bindings: [-48.23456, 20.12345, 1.5]
+      });
+    });
+
+    it('can make a point with a height and measure', function() {
+      testsql(queryBuilder().select(st.makePoint(-48.23456, 20.12345, 1.5, 2.5)), {
+        sql: 'select ST_MakePoint(?, ?, ?, ?)',
+        bindings: [-48.23456, 20.12345, 1.5, 2.5]
+      });
+    });
+
+    it('throws an error if provided a non-number longitude', function() {
+      expect(
+        function() {
+          return queryBuilder().select(st.makePoint('banana', 20.12345));
+        }
+      ).to.throw('Invalid number provided');
+    });
+
+    it('throws an error if provided a non-number latitude', function() {
+      expect(
+        function() {
+          return queryBuilder().select(st.makePoint(-48.23456, 'banana'));
+        }
+      ).to.throw('Invalid number provided');
+    });
+
+    it('does not throw an error if provided a number-y string latitude', function() {
+      expect(
+        function() {
+          return queryBuilder().select(st.makePoint(-48.23456, '20.12345'));
+        }
+      ).to.not.throw('Invalid number provided');
+
+      testsql(queryBuilder().select(st.makePoint(-48.23456, '20.12345')), {
+        sql: 'select ST_MakePoint(?, ?)',
+        bindings: [-48.23456, '20.12345']
+      });
+    });
+  });
+
+  describe('Point', function() {
+    it('can make a point', function() {
+      testsql(queryBuilder().select(st.point(-48.23456, 20.12345)), {
+        sql: 'select ST_Point(?, ?)',
+        bindings: [-48.23456, 20.12345]
+      });
     });
   });
 });
