@@ -276,6 +276,30 @@ describe('Geometry Constructors', function() {
         bindings: [-48.25456, 20.02345, -48.21456, 20.62345, 4326]
       });
     });
+
+    it('throws an error if provided a non-number min-latitude', function() {
+      expect(
+        function() {
+          return queryBuilder().select(st.makeEnvelope(-48.25456, 'banana', -48.21456, 20.62345));
+        }
+      ).to.throw('Invalid number provided');
+    });
+
+    it('throws an error if provided a non-number max-longitude', function() {
+      expect(
+        function() {
+          return queryBuilder().select(st.makeEnvelope(-48.25456, 20.02345, 'banana', 20.62345));
+        }
+      ).to.throw('Invalid number provided');
+    });
+
+    it('throws an error if provided a non-number srid', function() {
+      expect(
+        function() {
+          return queryBuilder().select(st.makeEnvelope(-48.25456, 20.02345, -48.21456, 20.62345, 'banana'));
+        }
+      ).to.throw('Invalid number provided');
+    });
   });
 
   describe('MakePoint', function() {
