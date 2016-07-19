@@ -54,6 +54,7 @@ console.log(sql3);
 - geometry(geography)
 - geomFromText(geom, srid)
 - geomFromGeoJSON(geojson /*object, string or column name*/)
+- makeValid(geom)
 - transform(geom, srid)
 - x
 - y

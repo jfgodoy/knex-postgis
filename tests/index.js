@@ -192,6 +192,13 @@ describe('Postgis functions', function() {
     });
   });
 
+  it('select with makevalid', function() {
+    testsql(queryBuilder().select('id', st.makeValid('geom')).from('points'), {
+      sql: 'select "id", ST_MakeValid("geom") from "points"',
+      bindings: []
+    });
+  });
+
   it('allow spaces between WKT type and the first parenthesis', function() {
     testsql(
       queryBuilder()
