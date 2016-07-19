@@ -55,6 +55,7 @@ console.log(sql3);
 - geomFromText(geom, srid)
 - geomFromGeoJSON(geojson /*object, string or column name*/)
 - makeValid(geom)
+- makeEnvelope(minlon, minlat, maxlon, maxlat, /* optional integer SRID */)
 - transform(geom, srid)
 - x
 - y

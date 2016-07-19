@@ -261,6 +261,22 @@ describe('Postgis functions', function() {
 
 });
 
+describe('Geometry Constructors', function() {
+  it('can make an envelope', function() {
+    testsql(queryBuilder().select(st.makeEnvelope(-48.25456, 20.02345, -48.21456, 20.62345)), {
+      sql: 'select ST_MakeEnvelope(?, ?, ?, ?)',
+      bindings: [-48.25456, 20.02345, -48.21456, 20.62345]
+    });
+  });
+
+  it('can make an envelope with a specified srid', function() {
+    testsql(queryBuilder().select(st.makeEnvelope(-48.25456, 20.02345, -48.21456, 20.62345, 4326)), {
+      sql: 'select ST_MakeEnvelope(?, ?, ?, ?, ?)',
+      bindings: [-48.25456, 20.02345, -48.21456, 20.62345, 4326]
+    });
+  });
+});
+
 describe('Postgis extras', function() {
 
   it('define extra functions', function() {
