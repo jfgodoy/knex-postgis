@@ -285,6 +285,14 @@ describe('Geometry Constructors', function() {
       ).to.throw('Invalid number provided');
     });
 
+    it('throws an error if provided a space min-latitude', function() {
+      expect(
+        function() {
+          return queryBuilder().select(st.makeEnvelope(-48.25456, ' ', -48.21456, 20.62345));
+        }
+      ).to.throw('Invalid number provided');
+    });
+
     it('throws an error if provided a non-number max-longitude', function() {
       expect(
         function() {
