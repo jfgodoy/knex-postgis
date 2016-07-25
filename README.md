@@ -54,8 +54,10 @@ console.log(sql3);
 - geometry(geography)
 - geomFromText(geom, srid)
 - geomFromGeoJSON(geojson /*object, string or column name*/)
-- makeValid(geom)
 - makeEnvelope(minlon, minlat, maxlon, maxlat, /* optional integer SRID */)
+- makePoint(lat, lon, /* optional z */, /* optional measure */)
+- makeValid(geom)
+- point(lat, lon)
 - transform(geom, srid)
 - x
 - y
