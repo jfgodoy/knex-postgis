@@ -137,3 +137,62 @@ describe('isNumber validation', function() {
     });
   });
 });
+
+describe('isString validation', function() {
+  describe('responds `true` for valid strings', function() {
+    it('for a normal string', function() {
+      expect(utils.isString('banana')).to.true;
+    });
+
+    it('for an empty string', function() {
+      expect(utils.isString('')).to.true;
+    });
+
+    it('for a space string', function() {
+      expect(utils.isString(' ')).to.true;
+    });
+  });
+
+  describe('responds `false` for invalid strings', function() {
+
+    it('for numbers', function() {
+      expect(utils.isString(5)).to.be.false;
+      expect(utils.isString(32.5)).to.be.false;
+    });
+
+    it('for nothing', function() {
+      expect(utils.isString()).to.be.false;
+    });
+
+    it('for null', function() {
+      expect(utils.isString(null)).to.be.false;
+    });
+
+    it('for undefined', function() {
+      expect(utils.isString(undefined)).to.be.false;
+    });
+
+    it('for object', function() {
+      expect(utils.isString({})).to.be.false;
+      expect(utils.isString({ test: 'yes' })).to.be.false;
+    });
+
+    it('for array', function() {
+      expect(utils.isString([])).to.be.false;
+      expect(utils.isString([1, 2, 3])).to.be.false;
+    });
+
+    it('for boolean values', function() {
+      expect(utils.isString(false)).to.be.false;
+      expect(utils.isString(true)).to.be.false;
+    });
+
+    it('for errors', function() {
+      expect(utils.isString(new Error())).to.be.false;
+    });
+
+    it('for functions', function() {
+      expect(utils.isString(function() {})).to.be.false;
+    });
+  });
+});
