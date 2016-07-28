@@ -33,6 +33,40 @@ describe('geoJSON validation', function() {
 
 });
 
+describe('isBoolean validation', function() {
+  describe('responds `true` for valid booleans', function() {
+    it('for true', function() {
+      expect(utils.isBoolean(true)).to.true;
+    });
+
+    it('for false', function() {
+      expect(utils.isBoolean(false)).to.true;
+    });
+  });
+
+  describe('responds `false` for invalid booleans', function() {
+    it('for strings', function() {
+      expect(utils.isBoolean("true")).to.false;
+    });
+
+    it('for null', function() {
+      expect(utils.isBoolean(null)).to.false;
+    });
+
+    it('for numbers', function() {
+      expect(utils.isBoolean(0)).to.false;
+    });
+
+    it('for undefined', function() {
+      expect(utils.isBoolean(undefined)).to.false;
+    });
+
+    it('for object', function() {
+      expect(utils.isBoolean({})).to.false;
+    });
+  });
+});
+
 describe('isNumber validation', function() {
   describe('responds `true` for valid numbers', function() {
     it('for a normal int', function() {

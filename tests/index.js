@@ -376,24 +376,46 @@ describe('Spatial Relationships', function() {
   describe('DWithin', function() {
     it('works as expected normally', function() {
       testsql(queryBuilder().select(st.dwithin('a', 'b', 12)), {
-        sql: 'select ST_DWithin(?, ?, ?)',
-        bindings: ['a', 'b', 12]
+        sql: 'select ST_DWithin("a", "b", ?)',
+        bindings: [12]
+      });
+    });
+
+    it('works with a created geometry', function() {
+      testsql(queryBuilder().select(st.dwithin('a', st.point(-48.23456, 20.12345), 12)), {
+        sql: 'select ST_DWithin("a", ST_Point(?, ?), ?)',
+        bindings: [-48.23456, 20.12345, 12]
       });
     });
 
     it('works as expected with spheroid argument', function() {
       testsql(queryBuilder().select(st.dwithin('a', 'b', 12, true)), {
-        sql: 'select ST_DWithin(?, ?, ?, ?)',
-        bindings: ['a', 'b', 12, true]
+        sql: 'select ST_DWithin("a", "b", ?, ?)',
+        bindings: [12, true]
       });
+    });
+
+    it('throws an error with invalid boolean spheroid argument', function() {
+      expect(
+        function() {
+          return queryBuilder().select(st.dwithin('a', 'b', 12, 'banana'));
+        }
+      ).to.throw('Invalid boolean provided');
     });
   });
 
   describe('Within', function() {
     it('works as expected', function() {
       testsql(queryBuilder().select(st.within('a', 'b')), {
-        sql: 'select ST_Within(?, ?)',
-        bindings: ['a', 'b']
+        sql: 'select ST_Within("a", "b")',
+        bindings: []
+      });
+    });
+
+    it('works with a created geometry', function() {
+      testsql(queryBuilder().select(st.within('a', st.point(-48.23456, 20.12345))), {
+        sql: 'select ST_Within("a", ST_Point(?, ?))',
+        bindings: [-48.23456, 20.12345]
       });
     });
   });
