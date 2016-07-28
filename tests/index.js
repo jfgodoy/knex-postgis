@@ -372,6 +372,33 @@ describe('Geometry Constructors', function() {
   });
 });
 
+describe('Spatial Relationships', function() {
+  describe('DWithin', function() {
+    it('works as expected normally', function() {
+      testsql(queryBuilder().select(st.dwithin('a', 'b', 12)), {
+        sql: 'select ST_DWithin(?, ?, ?)',
+        bindings: ['a', 'b', 12]
+      });
+    });
+
+    it('works as expected with spheroid argument', function() {
+      testsql(queryBuilder().select(st.dwithin('a', 'b', 12, true)), {
+        sql: 'select ST_DWithin(?, ?, ?, ?)',
+        bindings: ['a', 'b', 12, true]
+      });
+    });
+  });
+
+  describe('Within', function() {
+    it('works as expected', function() {
+      testsql(queryBuilder().select(st.within('a', 'b')), {
+        sql: 'select ST_Within(?, ?)',
+        bindings: ['a', 'b']
+      });
+    });
+  });
+});
+
 describe('Postgis extras', function() {
 
   it('define extra functions', function() {

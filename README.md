@@ -48,6 +48,7 @@ console.log(sql3);
 - asEWKT(column)
 - buffer(geom, radius)
 - centroid(geom)
+- dwithin(geom, geom, distance, /* optional bool spheroid */)
 - intersection(geom1, geom2)
 - intersects(geom1, geom2)
 - geography(geom)
@@ -59,6 +60,7 @@ console.log(sql3);
 - makeValid(geom)
 - point(lat, lon)
 - transform(geom, srid)
+- within(geom, geom)
 - x
 - y
 
