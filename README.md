@@ -48,6 +48,7 @@ console.log(sql3);
 - asEWKT(column)
 - buffer(geom, radius)
 - centroid(geom)
+- distance(geom, geom, /* optional bool spheroid */)
 - dwithin(geom, geom, distance, /* optional bool spheroid */)
 - intersection(geom1, geom2)
 - intersects(geom1, geom2)
