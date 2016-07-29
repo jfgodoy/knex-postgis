@@ -365,6 +365,27 @@ describe('Geometry Constructors', function() {
 });
 
 describe('Spatial Relationships', function() {
+  describe('Distance', function() {
+    it('works as expected normally', function() {
+      testsql(queryBuilder().select(st.distance('a', 'b')), {
+        sql: 'select ST_Distance("a", "b")',
+        bindings: []
+      });
+    });
+
+    it('works as expected with spheroid argument', function() {
+      testsql(queryBuilder().select(st.distance('a', 'b', true)), {
+        sql: 'select ST_Distance("a", "b", ?)',
+        bindings: [true]
+      });
+
+      testsql(queryBuilder().select(st.distance('a', 'b', false)), {
+        sql: 'select ST_Distance("a", "b", ?)',
+        bindings: [false]
+      });
+    });
+  });
+
   describe('DWithin', function() {
     it('works as expected normally', function() {
       testsql(queryBuilder().select(st.dwithin('a', 'b', 12)), {
