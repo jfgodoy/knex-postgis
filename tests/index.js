@@ -375,8 +375,8 @@ describe('Spatial Relationships', function() {
 
     it('works with a column name as the distance', function() {
       testsql(queryBuilder().select(st.dwithin('a', 'b', 'distanceColumn')), {
-        sql: 'select ST_DWithin("a", "b", ?)',
-        bindings: ['distanceColumn']
+        sql: 'select ST_DWithin("a", "b", "distanceColumn")',
+        bindings: []
       });
     });
 

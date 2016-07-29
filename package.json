@@ -8,8 +8,7 @@
     "url": "https://github.com/jfgodoy/knex-postgis.git"
   },
   "dependencies": {
-    "geojsonhint": "^1.0.0",
-    "lodash": "^4.14.0"
+    "geojsonhint": "^1.0.0"
   },
   "devDependencies": {
     "knex": "^0.7.3",
