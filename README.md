@@ -48,6 +48,7 @@ console.log(sql3);
 - asEWKT(column)
 - buffer(geom, radius)
 - centroid(geom)
+- dwithin(geom, geom, distance, /* optional bool spheroid */)
 - intersection(geom1, geom2)
 - intersects(geom1, geom2)
 - geography(geom)
@@ -55,10 +56,11 @@ console.log(sql3);
 - geomFromText(geom, srid)
 - geomFromGeoJSON(geojson /*object, string or column name*/)
 - makeEnvelope(minlon, minlat, maxlon, maxlat, /* optional integer SRID */)
-- makePoint(lat, lon, /* optional z */, /* optional measure */)
+- makePoint(lon, lat, /* optional z */, /* optional measure */)
 - makeValid(geom)
-- point(lat, lon)
+- point(lon, lat)
 - transform(geom, srid)
+- within(geom, geom)
 - x
 - y
 

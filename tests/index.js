@@ -280,15 +280,7 @@ describe('Geometry Constructors', function() {
     it('throws an error if provided a non-number min-latitude', function() {
       expect(
         function() {
-          return queryBuilder().select(st.makeEnvelope(-48.25456, 'banana', -48.21456, 20.62345));
-        }
-      ).to.throw('Invalid number provided');
-    });
-
-    it('throws an error if provided a space min-latitude', function() {
-      expect(
-        function() {
-          return queryBuilder().select(st.makeEnvelope(-48.25456, ' ', -48.21456, 20.62345));
+          return queryBuilder().select(st.makeEnvelope(-48.25456, null, -48.21456, 20.62345));
         }
       ).to.throw('Invalid number provided');
     });
@@ -296,7 +288,7 @@ describe('Geometry Constructors', function() {
     it('throws an error if provided a non-number max-longitude', function() {
       expect(
         function() {
-          return queryBuilder().select(st.makeEnvelope(-48.25456, 20.02345, 'banana', 20.62345));
+          return queryBuilder().select(st.makeEnvelope(-48.25456, 20.02345, {}, 20.62345));
         }
       ).to.throw('Invalid number provided');
     });
@@ -304,7 +296,7 @@ describe('Geometry Constructors', function() {
     it('throws an error if provided a non-number srid', function() {
       expect(
         function() {
-          return queryBuilder().select(st.makeEnvelope(-48.25456, 20.02345, -48.21456, 20.62345, 'banana'));
+          return queryBuilder().select(st.makeEnvelope(-48.25456, 20.02345, -48.21456, 20.62345, []));
         }
       ).to.throw('Invalid number provided');
     });
@@ -335,7 +327,7 @@ describe('Geometry Constructors', function() {
     it('throws an error if provided a non-number longitude', function() {
       expect(
         function() {
-          return queryBuilder().select(st.makePoint('banana', 20.12345));
+          return queryBuilder().select(st.makePoint(false, 20.12345));
         }
       ).to.throw('Invalid number provided');
     });
@@ -343,7 +335,7 @@ describe('Geometry Constructors', function() {
     it('throws an error if provided a non-number latitude', function() {
       expect(
         function() {
-          return queryBuilder().select(st.makePoint(-48.23456, 'banana'));
+          return queryBuilder().select(st.makePoint(-48.23456, {test: true}));
         }
       ).to.throw('Invalid number provided');
     });
@@ -366,6 +358,62 @@ describe('Geometry Constructors', function() {
     it('can make a point', function() {
       testsql(queryBuilder().select(st.point(-48.23456, 20.12345)), {
         sql: 'select ST_Point(?, ?)',
+        bindings: [-48.23456, 20.12345]
+      });
+    });
+  });
+});
+
+describe('Spatial Relationships', function() {
+  describe('DWithin', function() {
+    it('works as expected normally', function() {
+      testsql(queryBuilder().select(st.dwithin('a', 'b', 12)), {
+        sql: 'select ST_DWithin("a", "b", ?)',
+        bindings: [12]
+      });
+    });
+
+    it('works with a column name as the distance', function() {
+      testsql(queryBuilder().select(st.dwithin('a', 'b', 'distanceColumn')), {
+        sql: 'select ST_DWithin("a", "b", "distanceColumn")',
+        bindings: []
+      });
+    });
+
+    it('works with a created geometry', function() {
+      testsql(queryBuilder().select(st.dwithin('a', st.point(-48.23456, 20.12345), 12)), {
+        sql: 'select ST_DWithin("a", ST_Point(?, ?), ?)',
+        bindings: [-48.23456, 20.12345, 12]
+      });
+    });
+
+    it('works as expected with spheroid argument', function() {
+      testsql(queryBuilder().select(st.dwithin('a', 'b', 12, true)), {
+        sql: 'select ST_DWithin("a", "b", ?, ?)',
+        bindings: [12, true]
+      });
+    });
+
+    it('throws an error with invalid boolean spheroid argument', function() {
+      expect(
+        function() {
+          return queryBuilder().select(st.dwithin('a', 'b', 12, []));
+        }
+      ).to.throw('Invalid boolean provided');
+    });
+  });
+
+  describe('Within', function() {
+    it('works as expected', function() {
+      testsql(queryBuilder().select(st.within('a', 'b')), {
+        sql: 'select ST_Within("a", "b")',
+        bindings: []
+      });
+    });
+
+    it('works with a created geometry', function() {
+      testsql(queryBuilder().select(st.within('a', st.point(-48.23456, 20.12345))), {
+        sql: 'select ST_Within("a", ST_Point(?, ?))',
         bindings: [-48.23456, 20.12345]
       });
     });
