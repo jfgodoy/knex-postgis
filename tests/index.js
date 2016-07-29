@@ -394,6 +394,13 @@ describe('Spatial Relationships', function() {
       });
     });
 
+    it('works as expected with spheroid argument false', function() {
+      testsql(queryBuilder().select(st.dwithin('a', 'b', 12, false)), {
+        sql: 'select ST_DWithin("a", "b", ?, ?)',
+        bindings: [12, false]
+      });
+    });
+
     it('throws an error with invalid boolean spheroid argument', function() {
       expect(
         function() {
