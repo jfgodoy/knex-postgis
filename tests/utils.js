@@ -46,7 +46,7 @@ describe('isBoolean validation', function() {
 
   describe('responds `false` for invalid booleans', function() {
     it('for strings', function() {
-      expect(utils.isBoolean("true")).to.false;
+      expect(utils.isBoolean('true')).to.false;
     });
 
     it('for null', function() {

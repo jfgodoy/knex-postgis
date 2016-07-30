@@ -433,8 +433,7 @@ describe('Postgis extras', function() {
 
     testsql(
       queryBuilder()
-        .select('id', st.utmzone('point')
-        .as('utm'))
+        .select('id', st.utmzone('point').as('utm'))
         .from('points'),
       {
         sql: 'select "id", utmzone("point") as "utm" from "points"',
@@ -444,8 +443,7 @@ describe('Postgis extras', function() {
 
     testsql(
       queryBuilder()
-        .select('id', st.utmzone(st.geomFromText('Point(0 0, 0 1)', 4326))
-        .as('utm'))
+        .select('id', st.utmzone(st.geomFromText('Point(0 0, 0 1)', 4326)).as('utm'))
         .from('points'),
       {
         sql: 'select "id", utmzone(ST_geomFromText(?, ?)) as "utm" from "points"',

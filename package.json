@@ -11,12 +11,14 @@
     "geojsonhint": "^1.0.0"
   },
   "devDependencies": {
-    "knex": "^0.7.3",
     "chai": "^1.9.2",
+    "eslint": "^3.2.0",
+    "knex": "^0.7.3",
     "mocha": "^1.21.5"
   },
   "scripts": {
-    "test": "node_modules/.bin/mocha tests"
+    "test": "mocha tests",
+    "lint": "eslint ./"
   },
   "keywords": [
     "knex",
