@@ -423,10 +423,10 @@ describe('Spatial Relationships', function() {
 describe('Postgis extras', function() {
 
   it('define extra functions', function() {
-    knex.postgisDefineExtras(function(knex, formatter) {
+    knex.postgisDefineExtras(function(knex, formatter, postgisFn) {
       return {
         utmzone: function(geom) {
-          return knex.raw('utmzone(?)', [formatter.wrapWKT(geom)]);
+          return postgisFn('utmzone', formatter.wrapWKT(geom));
         }
       };
     });
