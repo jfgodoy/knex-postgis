@@ -1,0 +1,21 @@
+# .travis.yml
+sudo: false
+
+language: node_js
+
+node_js:
+  - '0.10'
+  - '0.12'
+  - '4'
+  - '5'
+  - '6'
+
+before_script:
+  - 'if [ "$KNEX_VERSION" ]; then npm install knex@^$KNEX_VERSION; fi'
+
+env:
+  - KNEX_VERSION=0.7
+  - KNEX_VERSION=0.8
+  - KNEX_VERSION=0.9
+  - KNEX_VERSION=0.10
+  - KNEX_VERSION=0.11
