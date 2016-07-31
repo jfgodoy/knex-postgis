@@ -52,6 +52,20 @@ describe('Postgis functions', function() {
     });
   });
 
+  it('select with x', function() {
+    testsql(queryBuilder().select('id', st.x('geom')).from('points'), {
+      sql: 'select "id", ST_X("geom") from "points"',
+      bindings: []
+    });
+  });
+
+  it('select with y', function() {
+    testsql(queryBuilder().select('id', st.y('geom')).from('points'), {
+      sql: 'select "id", ST_Y("geom") from "points"',
+      bindings: []
+    });
+  });
+
   it('select with asText', function() {
     testsql(queryBuilder().select('id', st.asText('geom')).from('points'), {
       sql: 'select "id", ST_asText("geom") as "geom" from "points"',
