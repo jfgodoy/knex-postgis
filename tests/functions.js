@@ -101,6 +101,31 @@ describe('asText', function() {
   });
 });
 
+describe('buffer', function() {
+  it('works with a column name and a number', function() {
+    var query, expected;
+
+    query = queryBuilder().select(st.buffer('geom', 1000));
+    expected = {
+      sql: 'select ST_Buffer("geom", ?)',
+      bindings: [1000]
+    };
+
+    testSql(query, expected);
+  });
+
+  it('works with a radius from a column name', function() {
+    var query, expected;
+
+    query = queryBuilder().select(st.buffer('geom', 'radius'));
+    expected = {
+      sql: 'select ST_Buffer("geom", "radius")',
+      bindings: []
+    };
+
+    testSql(query, expected);
+  });
+});
 
 describe('centroid', function() {
   it('can get the centroid of a geometry column', function() {
@@ -260,6 +285,24 @@ describe('geomFromText', function() {
     testSql(query, expected);
   });
 
+  it('allows srid from a column', function() {
+    var query, expected;
+
+    query = queryBuilder()
+      .insert({
+        'id': 1,
+        'geom': st.geomFromText('Polygon((0 0, 0 1, 1 1, 1 0, 0 0))', 'srid')
+      })
+      .into('points');
+
+    expected = {
+      sql: 'insert into "points" ("geom", "id") values (ST_geomFromText(?, "srid"), ?)',
+      bindings: ['Polygon((0 0, 0 1, 1 1, 1 0, 0 0))', 1]
+    };
+
+    testSql(query, expected);
+  });
+
 
   it('can create a geometry from a EWKT text', function() {
     var query, expected;
@@ -272,8 +315,8 @@ describe('geomFromText', function() {
       .into('points');
 
     expected = {
-      sql: 'insert into "points" ("geom", "id") values (ST_geomFromText(?, ?), ?)',
-      bindings: ['Polygon((0 0, 0 1, 1 1, 1 0, 0 0))', 4326, 1]
+      sql: 'insert into "points" ("geom", "id") values (ST_geomFromText(?), ?)',
+      bindings: ['SRID=4326;Polygon((0 0, 0 1, 1 1, 1 0, 0 0))', 1]
     };
 
     testSql(query, expected);
@@ -542,8 +585,45 @@ describe('point', function() {
 
     testSql(query, expected);
   });
+
+  it('can make a point using column values', function() {
+    var query, expected;
+
+    query = queryBuilder().select(st.point('x', 'y'));
+    expected = {
+      sql: 'select ST_Point("x", "y")',
+      bindings: []
+    };
+
+    testSql(query, expected);
+  });
 });
 
+describe('transform', function() {
+  it('works with a column name and a number', function() {
+    var query, expected;
+
+    query = queryBuilder().select(st.transform('geom', 4326));
+    expected = {
+      sql: 'select ST_transform("geom", ?)',
+      bindings: [4326]
+    };
+
+    testSql(query, expected);
+  });
+
+  it('works with a srid from a column name', function() {
+    var query, expected;
+
+    query = queryBuilder().select(st.transform('geom', 'srid'));
+    expected = {
+      sql: 'select ST_transform("geom", "srid")',
+      bindings: []
+    };
+
+    testSql(query, expected);
+  });
+});
 
 describe('within', function() {
   it('works as expected', function() {
