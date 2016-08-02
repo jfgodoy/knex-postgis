@@ -1,6 +1,7 @@
 'use strict';
 
-var chai = require('chai'),
+var compareVersions = require('compare-versions'),
+    chai = require('chai'),
     expect = chai.expect;
 
 
@@ -17,6 +18,10 @@ function queryBuilder() {
 
 function testSql(func, expected) {
   var sqlRes = func.toSQL();
+
+  if (compareVersions(knex.VERSION, '0.11') >= 0) {
+    expected.bindings = knex.client.prepBindings(expected.bindings);
+  }
 
   Object.keys(expected).forEach(function(key) {
     expect(sqlRes[key]).to.deep.equal(expected[key]);
