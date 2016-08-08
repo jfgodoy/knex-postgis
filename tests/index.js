@@ -213,6 +213,13 @@ describe('Postgis functions', function() {
     });
   });
 
+  it('select with distance', function() { 
+    testsql(queryBuilder().select('id', st.distance('a', 'b')).from('points'), {
+      sql: 'select "id", ST_Distance("a", "b") from "points"',
+      bindings: []
+    });
+  });
+
   it('allow spaces between WKT type and the first parenthesis', function() {
     testsql(
       queryBuilder()
