@@ -696,3 +696,29 @@ describe('y', function() {
     testSql(query, expected);
   });
 });
+
+describe('distance', function() {
+  it('works as expected', function() {
+    var query, expected;
+
+    query = queryBuilder().select(st.distance('a', 'b'));
+    expected = {
+      sql: 'select ST_Distance("a", "b")',
+      bindings: []
+    };
+
+    testSql(query, expected);
+  });
+
+  it('works with a created geometry', function() {
+    var query, expected;
+
+    query = queryBuilder().select(st.distance('a', st.point(-48.23456, 20.12345)));
+    expected = {
+      sql: 'select ST_Distance("a", ST_Point(?, ?))',
+      bindings: [-48.23456, 20.12345]
+    };
+
+    testSql(query, expected);
+  });
+});
