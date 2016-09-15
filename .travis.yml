@@ -14,7 +14,6 @@ before_script:
   - 'if [ "$KNEX_VERSION" ]; then npm install knex@^$KNEX_VERSION; fi'
 
 env:
-  - KNEX_VERSION=0.7
   - KNEX_VERSION=0.8
   - KNEX_VERSION=0.9
   - KNEX_VERSION=0.10
