@@ -86,3 +86,10 @@ knex.postgisDefineExtras(function(knex, formatter){
 
 //now you can use st.utmzone function in the same way as predefined functions
 ```
+
+
+## Changelog
+
+** 0.2.0 **
+  - (breaking change) Drop support for knex@0.7
+  - add support for knex@0.12
