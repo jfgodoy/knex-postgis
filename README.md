@@ -90,6 +90,7 @@ knex.postgisDefineExtras(function(knex, formatter){
 
 ## Changelog
 
-** 0.2.0 **
+**0.2.0**
+
   - (breaking change) Drop support for knex@0.7
   - add support for knex@0.12
