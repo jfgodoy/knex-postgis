@@ -17,7 +17,6 @@ function testError(obj) {
   }).to.throw(Error);
 }
 
-
 describe('geoJSON validation', function() {
 
   it('filter invalid ', function() {
@@ -193,6 +192,64 @@ describe('isString validation', function() {
 
     it('for functions', function() {
       expect(utils.isString(function() {})).to.be.false;
+    });
+  });
+});
+
+describe('isWKT validation', function() {
+  describe('responds `true` for valid WKTs', function() {
+    it('for points', function() {
+      var wkt = 'POINT(6 10)';
+
+      expect(utils.isWKT(wkt)).to.be.true;
+    });
+
+    it('for linestrings', function() {
+      var wkt = 'LINESTRING(3 4,10 50,20 25)';
+
+      expect(utils.isWKT(wkt)).to.be.true;
+    });
+
+    it('for polygons', function() {
+      var wkt = 'POLYGON((1 1,5 1,5 5,1 5,1 1),(2 2, 3 2, 3 3, 2 3,2 2))';
+
+      expect(utils.isWKT(wkt)).to.be.true;
+    });
+
+    it('for multipoints', function() {
+      var wkt = 'MULTIPOINT(3.5 5.6, 4.8 10.5)';
+
+      expect(utils.isWKT(wkt)).to.be.true;
+    });
+
+    it('for multilinestrings', function() {
+      var wkt = 'MULTILINESTRING((3 4,10 50,20 25),(-5 -8,-10 -8,-15 -4))';
+
+      expect(utils.isWKT(wkt)).to.be.true;
+    });
+
+    it('for multipolygons', function() {
+      var wkt = 'MULTIPOLYGON(((1 1,5 1,5 5,1 5,1 1),(2 2, 3 2, 3 3, 2 3,2 2)),((3 3,6 2,6 4,3 3))';
+
+      expect(utils.isWKT(wkt)).to.be.true;
+    });
+  });
+
+  describe('responds `false` for invalid WKTs', function() {
+    it('for nothing', function() {
+      expect(utils.isWKT()).to.be.false;
+    });
+
+    it('for null', function() {
+      expect(utils.isWKT(null)).to.be.false;
+    });
+
+    it('for undefined', function() {
+      expect(utils.isWKT(undefined)).to.be.false;
+    });
+
+    it('for non-WKT strings', function() {
+      expect(utils.isWKT('geom')).to.be.false;
     });
   });
 });
