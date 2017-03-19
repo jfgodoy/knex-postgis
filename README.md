@@ -90,6 +90,10 @@ knex.postgisDefineExtras(function(knex, formatter){
 
 ## Changelog
 
+**0.2.1**
+
+  - fix recognition of `multi*` WKTs (@johnhampton)
+
 **0.2.0**
 
   - (breaking change) Drop support for knex@0.7
