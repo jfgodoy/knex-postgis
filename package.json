@@ -14,7 +14,7 @@
     "chai": "^1.9.2",
     "compare-versions": "^2.0.2",
     "eslint": "^3.2.0",
-    "knex": "^0.7.3",
+    "knex": "^0.8.6",
     "mocha": "^1.21.5"
   },
   "scripts": {
