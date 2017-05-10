@@ -90,6 +90,10 @@ knex.postgisDefineExtras(function(knex, formatter){
 
 ## Changelog
 
+**0.2.2**
+
+  - update geojsonhint dependency to its new name (@davidfurlong)
+
 **0.2.1**
 
   - fix recognition of `multi*` WKTs (@johnhampton)
