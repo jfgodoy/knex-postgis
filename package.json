@@ -8,14 +8,14 @@
     "url": "https://github.com/jfgodoy/knex-postgis.git"
   },
   "dependencies": {
-    "@mapbox/geojsonhint": "^1.0.0"
+    "@mapbox/geojsonhint": "^2.0.1"
   },
   "devDependencies": {
-    "chai": "^1.9.2",
-    "compare-versions": "^2.0.2",
+    "chai": "^3.5.0",
+    "compare-versions": "^3.0.1",
     "eslint": "^3.2.0",
     "knex": "^0.8.6",
-    "mocha": "^1.21.5"
+    "mocha": "^3.4.1"
   },
   "scripts": {
     "test": "mocha tests",
