@@ -19,8 +19,8 @@ const db = knex({
 // install postgis functions in knex.postgis;
 const st = knexPostgis(db);
 /* or:
- * knexPostgis(knex);
- * const st = knex.postgis;
+ * knexPostgis(db);
+ * const st = db.postgis;
  */
 
 // insert a point
@@ -78,7 +78,7 @@ const db = knex({
   dialect: 'postgres'
 });
 
-knexPostgis(knex);
+knexPostgis(db);
 
 db.postgisDefineExtras((knex, formatter) => ({
   utmzone(geom) {
