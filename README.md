@@ -67,6 +67,7 @@ console.log(sql3);
 - within(geom, geom)
 - x
 - y
+- boundingBoxIntersection(geom a, geom b), represented as `a && b`, see [postgis documentation](http://postgis.net/docs/manual-2.0/geometry_overlaps.html)
 
 ## Define extra functions
 
@@ -90,6 +91,10 @@ db.postgisDefineExtras((knex, formatter) => ({
 
 
 ## Changelog
+
+**0.3.0**
+
+  - add support for [&&](http://postgis.net/docs/manual-2.0/geometry_overlaps.html) operator as `boundingBoxIntersection`
 
 **0.2.2**
 

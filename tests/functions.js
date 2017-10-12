@@ -722,3 +722,30 @@ describe('distance', function() {
     testSql(query, expected);
   });
 });
+
+describe('boundingBoxIntersection', function() {
+  it ('works with two columns', function() {
+    var query, expected;
+
+    query = queryBuilder().select(st.boundingBoxIntersection('a', 'b').as('intersection'));
+    expected = {
+      sql: 'select "a" && "b" as "intersection"',
+      bindings: []
+    };
+
+    testSql(query, expected);
+  });
+
+  it ('works with other functions', function() {
+    var query, expected;
+
+    query = queryBuilder().select(st.boundingBoxIntersection('a', st.buffer('b', 100)).as('intersection'));
+    expected = {
+      sql: 'select "a" && ST_Buffer("b", ?) as "intersection"',
+      bindings: [100]
+    };
+
+    testSql(query, expected);
+  });
+});
+
