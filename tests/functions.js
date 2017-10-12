@@ -723,13 +723,13 @@ describe('distance', function() {
   });
 });
 
-describe('boundingBoxIntersection', function() {
+describe('boundingBoxIntersects', function() {
   it ('works with two columns', function() {
     var query, expected;
 
-    query = queryBuilder().select(st.boundingBoxIntersection('a', 'b').as('intersection'));
+    query = queryBuilder().select(st.boundingBoxIntersects('a', 'b').as('intersects'));
     expected = {
-      sql: 'select "a" && "b" as "intersection"',
+      sql: 'select "a" && "b" as "intersects"',
       bindings: []
     };
 
@@ -739,9 +739,9 @@ describe('boundingBoxIntersection', function() {
   it ('works with other functions', function() {
     var query, expected;
 
-    query = queryBuilder().select(st.boundingBoxIntersection('a', st.buffer('b', 100)).as('intersection'));
+    query = queryBuilder().select(st.boundingBoxIntersects('a', st.buffer('b', 100)).as('intersects'));
     expected = {
-      sql: 'select "a" && ST_Buffer("b", ?) as "intersection"',
+      sql: 'select "a" && ST_Buffer("b", ?) as "intersects"',
       bindings: [100]
     };
 
@@ -749,3 +749,54 @@ describe('boundingBoxIntersection', function() {
   });
 });
 
+describe('boundingBoxContained', function() {
+  it ('works with two columns', function() {
+    var query, expected;
+
+    query = queryBuilder().select(st.boundingBoxContained('a', 'b').as('contained'));
+    expected = {
+      sql: 'select "a" @ "b" as "contained"',
+      bindings: []
+    };
+
+    testSql(query, expected);
+  });
+
+  it ('works with other functions', function() {
+    var query, expected;
+
+    query = queryBuilder().select(st.boundingBoxContained('a', st.buffer('b', 100)).as('contained'));
+    expected = {
+      sql: 'select "a" @ ST_Buffer("b", ?) as "contained"',
+      bindings: [100]
+    };
+
+    testSql(query, expected);
+  });
+});
+
+describe('boundingBoxContains', function() {
+  it ('works with two columns', function() {
+    var query, expected;
+
+    query = queryBuilder().select(st.boundingBoxContains('a', 'b').as('contains'));
+    expected = {
+      sql: 'select "a" ~ "b" as "contains"',
+      bindings: []
+    };
+
+    testSql(query, expected);
+  });
+
+  it ('works with other functions', function() {
+    var query, expected;
+
+    query = queryBuilder().select(st.boundingBoxContains('a', st.buffer('b', 100)).as('contains'));
+    expected = {
+      sql: 'select "a" ~ ST_Buffer("b", ?) as "contains"',
+      bindings: [100]
+    };
+
+    testSql(query, expected);
+  });
+});

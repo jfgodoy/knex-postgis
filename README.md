@@ -67,7 +67,9 @@ console.log(sql3);
 - within(geom, geom)
 - x
 - y
-- boundingBoxIntersection(geom a, geom b), represented as `a && b`, see [postgis documentation](http://postgis.net/docs/manual-2.0/geometry_overlaps.html)
+- boundingBoxIntersects(geom a, geom b), represented as `a && b`, see [postgis documentation](http://postgis.net/docs/manual-2.0/geometry_overlaps.html)
+- boundingBoxContained(geom a, geom b), represented as `a @ b`, see [postgis documentation](http://postgis.net/docs/manual-2.0/ST_Geometry_Contained.html)
+- boundingBoxContains(geom a, geom b), represented as `a ~ b`, see [postgis documentation](http://postgis.net/docs/manual-2.0/ST_Geometry_Contain.html)
 
 ## Define extra functions
 
@@ -91,6 +93,12 @@ db.postgisDefineExtras((knex, formatter) => ({
 
 
 ## Changelog
+
+**0.4.0**
+
+  - add support for [@](http://postgis.net/docs/manual-2.0/ST_Geometry_Contained.html) operator as `boundingBoxContained`
+  - add support for [~](http://postgis.net/docs/manual-2.0/ST_Geometry_Contain.html) operator as `boundingBoxContains`
+  - renombra función `boundingBoxIntersection` a `boundingBoxIntersects`. La función `boundingBoxIntersection` sera eliminada en la siguiente versión.
 
 **0.3.0**
 
