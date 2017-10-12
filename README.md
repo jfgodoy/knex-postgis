@@ -98,7 +98,7 @@ db.postgisDefineExtras((knex, formatter) => ({
 
   - add support for [@](http://postgis.net/docs/manual-2.0/ST_Geometry_Contained.html) operator as `boundingBoxContained`
   - add support for [~](http://postgis.net/docs/manual-2.0/ST_Geometry_Contain.html) operator as `boundingBoxContains`
-  - renombra función `boundingBoxIntersection` a `boundingBoxIntersects`. La función `boundingBoxIntersection` sera eliminada en la siguiente versión.
+  - rename function `boundingBoxIntersection` to `boundingBoxIntersects`. The function `boundingBoxIntersection` will be removed in the next release.
 
 **0.3.0**
 
