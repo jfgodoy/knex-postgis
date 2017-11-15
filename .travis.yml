@@ -5,8 +5,9 @@ language: node_js
 
 node_js:
   - '4'
-  - '5'
   - '6'
+  - '8'
+  - '9'
 
 before_script:
   - 'if [ "$KNEX_VERSION" ]; then npm install knex@^$KNEX_VERSION; fi'
