@@ -94,6 +94,10 @@ db.postgisDefineExtras((knex, formatter) => ({
 
 ## Changelog
 
+**0.5.0**
+  - drop support for node 0.x
+  - add knex@0.14, node 8 y node 9 to travis
+
 **0.4.0**
 
   - add support for [@](http://postgis.net/docs/manual-2.0/ST_Geometry_Contained.html) operator as `boundingBoxContained`
