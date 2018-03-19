@@ -52,6 +52,7 @@ console.log(sql3);
 - buffer(geom, radius)
 - centroid(geom)
 - distance(geom, geom)
+- distanceSphere(geom, geom)
 - dwithin(geom, geom, distance, /* optional bool spheroid */)
 - intersection(geom1, geom2)
 - intersects(geom1, geom2)
@@ -93,6 +94,9 @@ db.postgisDefineExtras((knex, formatter) => ({
 
 
 ## Changelog
+
+**0.6.0**
+  - add support for [st_DistanceSphere](https://postgis.net/docs/ST_DistanceSphere.html)
 
 **0.5.0**
   - drop support for node 0.x

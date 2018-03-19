@@ -723,6 +723,32 @@ describe('distance', function() {
   });
 });
 
+describe('distanceSphere', function() {
+  it('works as expected', function() {
+    var query, expected;
+
+    query = queryBuilder().select(st.distanceSphere('a', 'b'));
+    expected = {
+      sql: 'select ST_DistanceSphere("a", "b")',
+      bindings: []
+    };
+
+    testSql(query, expected);
+  });
+
+  it('works with a created geometry', function() {
+    var query, expected;
+
+    query = queryBuilder().select(st.distanceSphere('a', st.point(-48.23456, 20.12345)));
+    expected = {
+      sql: 'select ST_DistanceSphere("a", ST_Point(?, ?))',
+      bindings: [-48.23456, 20.12345]
+    };
+
+    testSql(query, expected);
+  });
+});
+
 describe('boundingBoxIntersects', function() {
   it ('works with two columns', function() {
     var query, expected;
