@@ -66,6 +66,7 @@ console.log(sql3);
 - point(lon, lat)
 - transform(geom, srid)
 - within(geom, geom)
+- setSRID(geom, srid)
 - x
 - y
 - boundingBoxIntersects(geom a, geom b), represented as `a && b`, see [postgis documentation](http://postgis.net/docs/manual-2.0/geometry_overlaps.html)

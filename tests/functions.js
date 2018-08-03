@@ -826,3 +826,29 @@ describe('boundingBoxContains', function() {
     testSql(query, expected);
   });
 });
+
+describe('setSRID', function() {
+  it('works as expected', function() {
+    var query, expected;
+
+    query = queryBuilder().select(st.setSRID('a', 4326));
+    expected = {
+      sql: 'select ST_SetSRID("a", ?)',
+      bindings: [4326]
+    };
+
+    testSql(query, expected);
+  });
+
+  it('works with a created geometry', function() {
+    var query, expected;
+
+    query = queryBuilder().select(st.setSRID(st.point(-48.23456, 20.12345), 4326));
+    expected = {
+      sql: 'select ST_SetSRID(ST_Point(?, ?), ?)',
+      bindings: [-48.23456, 20.12345, 4326]
+    };
+
+    testSql(query, expected);
+  });
+});
