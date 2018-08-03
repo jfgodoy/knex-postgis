@@ -96,6 +96,9 @@ db.postgisDefineExtras((knex, formatter) => ({
 
 ## Changelog
 
+**0.7.0**
+  - add support for [st_SetSRID](https://postgis.net/docs/ST_SetSRID.html)
+
 **0.6.0**
   - add support for [st_DistanceSphere](https://postgis.net/docs/ST_DistanceSphere.html)
 
