@@ -605,7 +605,7 @@ describe('transform', function() {
 
     query = queryBuilder().select(st.transform('geom', 4326));
     expected = {
-      sql: 'select ST_transform("geom", ?)',
+      sql: 'select ST_transform("geom", ?::int)',
       bindings: [4326]
     };
 
