@@ -95,6 +95,10 @@ db.postgisDefineExtras((knex, formatter) => ({
 
 
 ## Changelog
+**0.8.0**
+  - drop support for node 4
+  - fix st_transform function to avoid srid be interpreted as string
+  - update dependencies
 
 **0.7.0**
   - add support for [st_SetSRID](https://postgis.net/docs/ST_SetSRID.html)
