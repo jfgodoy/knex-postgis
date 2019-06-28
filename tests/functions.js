@@ -214,7 +214,7 @@ describe('geomFromGeoJSON', function() {
 
     expected = {
       sql: 'insert into "points" ("geom", "id") values (ST_geomFromGeoJSON(?), ?)',
-      bindings: [{type:'Point', coordinates:[-48.23456, 20.12345]}, 1]
+      bindings: ['{"type":"Point","coordinates":[-48.23456,20.12345]}', 1]
     };
 
     testSql(query, expected);
@@ -232,7 +232,7 @@ describe('geomFromGeoJSON', function() {
 
     expected = {
       sql: 'insert into "points" ("geom", "id") values (ST_geomFromGeoJSON(?), ?)',
-      bindings: [{type:'Point', coordinates:[-48.23456, 20.12345]}, 1]
+      bindings: ['{"type":"Point","coordinates":[-48.23456,20.12345]}', 1]
     };
 
     testSql(query, expected);
