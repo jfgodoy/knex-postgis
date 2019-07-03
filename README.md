@@ -95,6 +95,10 @@ db.postgisDefineExtras((knex, formatter) => ({
 
 
 ## Changelog
+
+**0.8.1**
+  - fix result of `.toString()` in queries that use geoJSON. Now knex sends to pg the geom in string format instead of object.
+
 **0.8.0**
   - drop support for node 4
   - fix st_transform function to avoid srid be interpreted as string
