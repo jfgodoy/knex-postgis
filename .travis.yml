@@ -8,6 +8,7 @@ node_js:
   - '8'
   - '9'
   - '10'
+  - '12'
 
 before_script:
   - 'if [ "$KNEX_VERSION" ]; then npm install knex@^$KNEX_VERSION; fi'
@@ -22,4 +23,7 @@ env:
   - KNEX_VERSION=0.14
   - KNEX_VERSION=0.15
   - KNEX_VERSION=0.16
-
+  - KNEX_VERSION=0.17
+  - KNEX_VERSION=0.18
+  - KNEX_VERSION=0.19
+  - KNEX_VERSION=0.20
