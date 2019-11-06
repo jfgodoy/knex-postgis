@@ -13,7 +13,7 @@ const knex = require('knex');
 const knexPostgis = require('knex-postgis');
 
 const db = knex({
-  dialect: 'postgres'
+  client: 'postgres'
 });
 
 // install postgis functions in knex.postgis;
@@ -80,7 +80,7 @@ const knex = require('knex');
 const knexPostgis = require('knex-postgis');
 
 const db = knex({
-  dialect: 'postgres'
+  client: 'postgres'
 });
 
 knexPostgis(db);

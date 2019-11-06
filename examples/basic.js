@@ -1,7 +1,7 @@
 'use strict';
 
 var knex = require('knex')({
-  dialect: 'postgres'
+  client: 'postgres'
 });
 
 // install postgis functions in knex.postgis;

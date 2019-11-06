@@ -4,12 +4,19 @@ var compareVersions = require('compare-versions'),
     chai = require('chai'),
     expect = chai.expect;
 
-
-var knex = require('knex')({
-  dialect: 'postgres'
-});
-
 var KNEX_VERSION = require('knex/package').version;
+
+var knex;
+if (compareVersions(KNEX_VERSION, '0.16') >= 0) {
+  knex = require('knex')({
+    client: 'postgres'
+  });
+} else {
+  knex = require('knex')({
+    dialect: 'postgres'
+  });
+}
+
 
 // install postgis extension
 require('../lib/index.js')(knex);
