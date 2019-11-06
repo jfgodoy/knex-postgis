@@ -1,6 +1,6 @@
 'use strict';
 
-/* globals describe, it */
+
 var tester = require('./tester'),
     knex = tester.knex,
     st = knex.postgis,

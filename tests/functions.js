@@ -1,6 +1,5 @@
 'use strict';
 
-/* globals describe, it */
 var chai = require('chai'),
     tester = require('./tester'),
     expect = chai.expect,
