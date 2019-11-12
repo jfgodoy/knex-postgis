@@ -1,4 +1,4 @@
-import * as GeoJSON from 'geojson';
+import { Geometry } from 'geojson';
 import * as Knex from 'knex';
 
 type ColumnName = string | Knex.Raw | Knex.QueryBuilder;
@@ -143,7 +143,7 @@ declare namespace KnexPostgis {
          *
          * @see {@link https://postgis.net/docs/ST_GeomFromGeoJSON.html}
          */
-        geomFromGeoJSON(geojson: GeoJSON.GeoJsonObject|ColumnName): ExtendedKnexRaw;
+        geomFromGeoJSON(geojson: Geometry|ColumnName): ExtendedKnexRaw;
 
         /**
          * Creates a rectangular Polygon formed from the given minimums and maximums. Input values

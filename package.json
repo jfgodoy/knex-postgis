@@ -9,7 +9,8 @@
     "url": "https://github.com/jfgodoy/knex-postgis.git"
   },
   "dependencies": {
-    "@mapbox/geojsonhint": "^3.0.0"
+    "@mapbox/geojsonhint": "^3.0.0",
+    "@types/geojson": "^7946.0.7"
   },
   "devDependencies": {
     "@types/node": "^12.12.7",
