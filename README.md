@@ -1,4 +1,9 @@
 # knex-postgis
+[![npm version](http://img.shields.io/npm/v/knex-postgis.svg)](https://npmjs.org/package/knex-postgis)
+[![npm downloads](https://img.shields.io/npm/dm/knex-postgis.svg)](https://npmjs.org/package/knex-postgis)
+[![Build Status](https://travis-ci.org/jfgodoy/knex-postgis.svg?branch=master)](https://travis-ci.org/jfgodoy/knex-postgis)
+[![Dependencies Status](https://img.shields.io/david/jfgodoy/knex-postgis)](https://david-dm.org/jfgodoy/knex-postgis)
+[![License](https://img.shields.io/github/license/jfgodoy/knex-postgis)](https://github.com/jfgodoy/knex-postgis/blob/master/LICENSE)
 
 Extension for use postgis functions in [knex](http://knexjs.org) SQL query builder.
 
