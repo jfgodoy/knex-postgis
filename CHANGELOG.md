@@ -1,5 +1,15 @@
 # Changelog
 
+## [ 0.9.0 ] - 2019-11-12
+### Breaking Changes
+  - drop support for node 6
+
+### Changes
+  - add new versions of knex and node to travis
+  - update dependencies
+  - update examples to avoid warnings with the latest knex
+  - fix linter warnings
+
 ## [ 0.8.1 ] - 2019-07-03
   - fix result of `.toString()` in queries that use geoJSON. Now knex sends to pg the geom in string format instead of object.
 
