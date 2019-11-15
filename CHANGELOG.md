@@ -1,5 +1,8 @@
 # Changelog
 
+## [ 0.10.0 ] - 2019-11-15
+  - add basic support for typescript
+
 ## [ 0.9.0 ] - 2019-11-12
 ### Breaking Changes
   - drop support for node 6
