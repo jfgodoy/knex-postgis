@@ -851,3 +851,23 @@ describe('setSRID', function() {
     testSql(query, expected);
   });
 });
+
+describe('geographyFromText', function() {
+  it('can create a geography from a WKT text', function() {
+    var query, expected;
+
+    query = queryBuilder()
+      .insert({
+        'id': 1,
+        'geog': st.geographyFromText('POINT(-118.4079 33.9434)')
+      })
+      .into('points');
+
+    expected = {
+      sql: 'insert into "points" ("geog", "id") values (ST_GeographyFromText(?), ?)',
+      bindings: ['POINT(-118.4079 33.9434)', 1]
+    };
+
+    testSql(query, expected);
+  });
+});

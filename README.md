@@ -62,6 +62,7 @@ console.log(sql3);
 - intersection(geom1, geom2), see [postgis documentation](https://postgis.net/docs/ST_Intersection.html)
 - intersects(geom1, geom2), see [postgis documentation](https://postgis.net/docs/ST_Intersects.html)
 - geography(geom)
+- geographyFromText(ewkt), see [postgis documentation](https://postgis.net/docs/ST_GeographyFromText.html)
 - geometry(geography)
 - geomFromText(geom, srid), see [postgis documentation](http://www.postgis.net/docs/ST_GeomFromText.html)
 - geomFromGeoJSON(geojson /*object, string or column name*/), see [postgis documentation](https://postgis.net/docs/ST_GeomFromGeoJSON.html)

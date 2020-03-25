@@ -127,6 +127,13 @@ declare namespace KnexPostgis {
         geography(geom: ColumnName): ExtendedKnexRaw;
 
         /**
+         * Returns a geography object from the well-known text representation. SRID 4326 is assumed if unspecified.
+         *
+         * @see {@link https://postgis.net/docs/ST_GeographyFromText.html }
+         */
+        geographyFromText(ewkt: string): ExtendedKnexRaw;
+
+        /**
          * Casts geography to geometry
          */
         geometry(geography: ColumnName): ExtendedKnexRaw;
