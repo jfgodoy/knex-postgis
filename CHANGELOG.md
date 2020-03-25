@@ -1,5 +1,8 @@
 # Changelog
 
+## [ 0.11.0 ] - 2020-03-25
+  - add function [ST_GeographyFromText](https://postgis.net/docs/ST_GeographyFromText.html)
+
 ## [ 0.10.0 ] - 2019-11-15
   - add basic support for typescript
 
