@@ -696,6 +696,50 @@ describe('y', function() {
   });
 });
 
+describe('z', function() {
+  it('can get z coordinate from a geometry column', function() {
+    var query = queryBuilder().select(st.z('geom')).from('points');
+    var expected = {
+      sql: 'select ST_Z("geom") from "points"',
+      bindings: []
+    };
+
+    testSql(query, expected);
+  });
+
+  it ('can get z coordinate from a wkt geometry', function() {
+    var query = queryBuilder().select(st.z('POINT(1 2 3 4)')).from('points');
+    var expected = {
+      sql: 'select ST_Z(?) from "points"',
+      bindings: ['POINT(1 2 3 4)']
+    };
+
+    testSql(query, expected);
+  });
+});
+
+describe('m', function() {
+  it('can get m coordinate from a geometry column', function() {
+    var query = queryBuilder().select(st.m('geom')).from('points');
+    var expected = {
+      sql: 'select ST_M("geom") from "points"',
+      bindings: []
+    };
+
+    testSql(query, expected);
+  });
+
+  it ('can get m coordinate from a wkt geometry', function() {
+    var query = queryBuilder().select(st.m('POINT(1 2 3 4)')).from('points');
+    var expected = {
+      sql: 'select ST_M(?) from "points"',
+      bindings: ['POINT(1 2 3 4)']
+    };
+
+    testSql(query, expected);
+  });
+});
+
 describe('distance', function() {
   it('works as expected', function() {
     var query, expected;

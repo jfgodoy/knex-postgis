@@ -75,6 +75,8 @@ console.log(sql3);
 - setSRID(geom, srid), see [postgis documentation](https://postgis.net/docs/ST_SetSRID.html)
 - x, see [postgis documentation](https://postgis.net/docs/ST_X.html)
 - y, see [postgis documentation](https://postgis.net/docs/ST_Y.html)
+- z, see [postgis documentation](https://postgis.net/docs/ST_Z.html)
+- m, see [postgis documentation](https://postgis.net/docs/ST_M.html)
 - boundingBoxIntersects(geom a, geom b), represented as `a && b`, see [postgis documentation](http://postgis.net/docs/manual-2.0/geometry_overlaps.html)
 - boundingBoxContained(geom a, geom b), represented as `a @ b`, see [postgis documentation](http://postgis.net/docs/manual-2.0/ST_Geometry_Contained.html)
 - boundingBoxContains(geom a, geom b), represented as `a ~ b`, see [postgis documentation](http://postgis.net/docs/manual-2.0/ST_Geometry_Contain.html)

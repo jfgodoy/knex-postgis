@@ -215,6 +215,20 @@ declare namespace KnexPostgis {
          * @see {@link https://postgis.net/docs/ST_Y.html }
          */
         y(geom: ColumnName): ExtendedKnexRaw;
+
+        /**
+         * Return the Z coordinate of the point, or NULL if not available. Input must be a point.
+         *
+         * @see {@link https://postgis.net/docs/ST_Z.html}
+         */
+        z(geom: ColumnName): ExtendedKnexRaw;
+
+        /**
+         * Return the M coordinate of a Point, or NULL if not available. Input must be a Point.
+         *
+         * @see {@link https://postgis.net/docs/ST_M.html}
+         */
+        m(geom: ColumnName): ExtendedKnexRaw;
     }
 }
 
