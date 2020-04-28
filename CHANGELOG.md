@@ -1,5 +1,11 @@
 # Changelog
 
+## [ 0.12.0 ] - 2020-04-27
+  - add z and m functions
+  - update devDependencies
+  - add knex 0.21 to travis
+
+
 ## [ 0.11.0 ] - 2020-03-25
   - add function [ST_GeographyFromText](https://postgis.net/docs/ST_GeographyFromText.html)
 
