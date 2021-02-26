@@ -915,3 +915,17 @@ describe('geographyFromText', function() {
     testSql(query, expected);
   });
 });
+
+describe('multi', function() {
+  it('works as expected', function() {
+    var query, expected;
+
+    query = queryBuilder().select(st.asText(st.multi(st.geomFromText('Polygon((0 0, 0 1, 1 1, 1 0, 0 0))', 4326))));
+    expected = {
+      sql: `select ST_asText(ST_Multi(ST_geomFromText(?, ?)))`,
+      bindings: ['Polygon((0 0, 0 1, 1 1, 1 0, 0 0))', 4326]
+    };
+
+    testSql(query, expected);
+  });
+});

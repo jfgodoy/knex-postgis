@@ -80,7 +80,7 @@ console.log(sql3);
 - boundingBoxIntersects(geom a, geom b), represented as `a && b`, see [postgis documentation](http://postgis.net/docs/manual-2.0/geometry_overlaps.html)
 - boundingBoxContained(geom a, geom b), represented as `a @ b`, see [postgis documentation](http://postgis.net/docs/manual-2.0/ST_Geometry_Contained.html)
 - boundingBoxContains(geom a, geom b), represented as `a ~ b`, see [postgis documentation](http://postgis.net/docs/manual-2.0/ST_Geometry_Contain.html)
-
+- multi(geom), see [postgis documentation](https://postgis.net/docs/ST_Multi.html)
 ## Define extra functions
 
 ```js

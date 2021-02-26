@@ -14,7 +14,7 @@
   },
   "devDependencies": {
     "@types/node": "^13.13.4",
-    "chai": "^4.2.0",
+    "chai": "^4.3.0",
     "compare-versions": "^3.6.0",
     "eslint": "^6.8.0",
     "knex": "^0.21.1",
