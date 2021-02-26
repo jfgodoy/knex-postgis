@@ -229,6 +229,13 @@ declare namespace KnexPostgis {
          * @see {@link https://postgis.net/docs/ST_M.html}
          */
         m(geom: ColumnName): ExtendedKnexRaw;
+
+        /**
+         * Returns the geometry as a MULTI* geometry.
+         *
+         * @see {@link https://postgis.net/docs/ST_Multi.html }
+         */
+        multi(geom: ColumnName): ExtendedKnexRaw;
     }
 }
 
