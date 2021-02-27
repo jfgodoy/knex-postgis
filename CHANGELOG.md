@@ -1,5 +1,8 @@
 # Changelog
 
+## [ 0.13.0 ] - 2021-02-26
+  - add `multi` function
+
 ## [ 0.12.0 ] - 2020-04-27
   - add z and m functions
   - update devDependencies
