@@ -6,12 +6,14 @@ var chai = require('chai'),
 var utils = require('../lib/utils');
 
 function test(obj, expected) {
-  expect(utils.normalizeGeoJsonGeometry(obj)).to.deep.equals(expected);
+  var str = JSON.stringify(obj);
+  expect(utils.checkGeoJsonGeometry(str)).to.deep.equals(expected);
 }
 
 function testError(obj) {
   expect(function() {
-    utils.normalizeGeoJsonGeometry(obj);
+    var str = JSON.stringify(obj);
+    utils.checkGeoJsonGeometry(str);
   }).to.throw(Error);
 }
 
