@@ -1,5 +1,10 @@
 # Changelog
 
+## [ 0.14.0 ] - 2021-07-03
+  - replace deprecated dependency `@mapbox/geojsonhint` with `@placemarkio/check-geojson` from the same author. This dependency is used to validate geojson values, so the replacement has affected a bit that part. According to `check-geojson` documentation, there is no validation for excessive coordinate precision and right-hand rule compliance.
+  - drop support for node 8, 9, 10.
+  - add tests in travis for node 14 and 16
+
 ## [ 0.13.0 ] - 2021-02-26
   - add `multi` function
 
