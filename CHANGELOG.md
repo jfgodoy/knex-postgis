@@ -1,5 +1,8 @@
 # Changelog
 
+## [ 0.14.1 ] - 2021-07-05
+  - fix typescript types
+
 ## [ 0.14.0 ] - 2021-07-03
   - replace deprecated dependency `@mapbox/geojsonhint` with `@placemarkio/check-geojson` from the same author. This dependency is used to validate geojson values, so the replacement has affected a bit that part. According to `check-geojson` documentation, there is no validation for excessive coordinate precision and right-hand rule compliance.
   - drop support for node 8, 9, 10.
