@@ -1,5 +1,5 @@
 import { Geometry } from 'geojson';
-import * as Knex from 'knex';
+import { Knex } from 'knex';
 
 type ColumnName = string | Knex.Raw | Knex.QueryBuilder;
 
