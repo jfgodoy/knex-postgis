@@ -1,5 +1,8 @@
 # Changelog
 
+## [ 0.14.2 ] - 2022-03-09
+  - avoid geojson validation issue (see https://github.com/placemark/check-geojson/issues/20) by using exact version 0.1.7
+
 ## [ 0.14.1 ] - 2021-07-05
   - fix typescript types
 
