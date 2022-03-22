@@ -1,5 +1,8 @@
 # Changelog
 
+## [ 0.14.3 ] - 2022-03-21
+  - fix geomFromGeoJSON for type GeometryCollection
+
 ## [ 0.14.2 ] - 2022-03-09
   - avoid geojson validation issue (see https://github.com/placemark/check-geojson/issues/20) by using exact version 0.1.7
 
