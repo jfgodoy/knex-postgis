@@ -219,6 +219,25 @@ describe('geomFromGeoJSON', function() {
     testSql(query, expected);
   });
 
+
+  it('can create a geometry collection from a json text', function() {
+    var query, expected;
+
+    query = queryBuilder()
+      .insert({
+        'id': 1,
+        'geom': st.geomFromGeoJSON('{ "type": "GeometryCollection", "geometries": [ { "type": "Point", "coordinates": [100.0, 0.0] }, { "type": "LineString", "coordinates": [ [101.0, 0.0], [102.0, 1.0] ] } ] }')
+      })
+      .into('geometries');
+
+    expected = {
+      sql: 'insert into "geometries" ("geom", "id") values (ST_geomFromGeoJSON(?), ?)',
+      bindings: ['{"type":"GeometryCollection","geometries":[{"type":"Point","coordinates":[100,0]},{"type":"LineString","coordinates":[[101,0],[102,1]]}]}', 1]
+    };
+
+    testSql(query, expected);
+  });
+
   it('can create a geometry from a json object', function() {
     var query, expected;
 
